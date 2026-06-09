@@ -1,0 +1,391 @@
+{
+  "dataset_stats": {
+    "total_users": 610,
+    "total_movies": 9724,
+    "total_ratings": 100836,
+    "rating_range": {
+      "min": 0.5,
+      "max": 5.0
+    },
+    "avg_rating": 3.5,
+    "median_rating": 3.5
+  },
+  "user_stats": {
+    "most_active_users": [
+      {
+        "userId": 414,
+        "total_ratings": 2698,
+        "average_rating": 3.39
+      },
+      {
+        "userId": 599,
+        "total_ratings": 2478,
+        "average_rating": 2.64
+      },
+      {
+        "userId": 474,
+        "total_ratings": 2108,
+        "average_rating": 3.4
+      },
+      {
+        "userId": 448,
+        "total_ratings": 1864,
+        "average_rating": 2.85
+      },
+      {
+        "userId": 274,
+        "total_ratings": 1346,
+        "average_rating": 3.24
+      },
+      {
+        "userId": 610,
+        "total_ratings": 1302,
+        "average_rating": 3.69
+      },
+      {
+        "userId": 68,
+        "total_ratings": 1260,
+        "average_rating": 3.23
+      },
+      {
+        "userId": 380,
+        "total_ratings": 1218,
+        "average_rating": 3.67
+      },
+      {
+        "userId": 606,
+        "total_ratings": 1115,
+        "average_rating": 3.66
+      },
+      {
+        "userId": 288,
+        "total_ratings": 1055,
+        "average_rating": 3.15
+      }
+    ],
+    "average_ratings_per_user": 165.3,
+    "ratings_per_user_distribution": {
+      "count": 610.0,
+      "mean": 165.3,
+      "std": 269.48,
+      "min": 20.0,
+      "25%": 35.0,
+      "50%": 70.5,
+      "75%": 168.0,
+      "max": 2698.0
+    }
+  },
+  "movie_stats": {
+    "most_rated_movies": [
+      {
+        "title": "Forrest Gump (1994)",
+        "num_ratings": 329,
+        "avg_rating": 4.16
+      },
+      {
+        "title": "Shawshank Redemption, The (1994)",
+        "num_ratings": 317,
+        "avg_rating": 4.43
+      },
+      {
+        "title": "Pulp Fiction (1994)",
+        "num_ratings": 307,
+        "avg_rating": 4.2
+      },
+      {
+        "title": "Silence of the Lambs, The (1991)",
+        "num_ratings": 279,
+        "avg_rating": 4.16
+      },
+      {
+        "title": "Matrix, The (1999)",
+        "num_ratings": 278,
+        "avg_rating": 4.19
+      },
+      {
+        "title": "Star Wars: Episode IV - A New Hope (1977)",
+        "num_ratings": 251,
+        "avg_rating": 4.23
+      },
+      {
+        "title": "Jurassic Park (1993)",
+        "num_ratings": 238,
+        "avg_rating": 3.75
+      },
+      {
+        "title": "Braveheart (1995)",
+        "num_ratings": 237,
+        "avg_rating": 4.03
+      },
+      {
+        "title": "Terminator 2: Judgment Day (1991)",
+        "num_ratings": 224,
+        "avg_rating": 3.97
+      },
+      {
+        "title": "Schindler's List (1993)",
+        "num_ratings": 220,
+        "avg_rating": 4.22
+      }
+    ],
+    "highest_rated_movies": [
+      {
+        "title": "Shawshank Redemption, The (1994)",
+        "num_ratings": 317,
+        "avg_rating": 4.43
+      },
+      {
+        "title": "Godfather, The (1972)",
+        "num_ratings": 192,
+        "avg_rating": 4.29
+      },
+      {
+        "title": "Fight Club (1999)",
+        "num_ratings": 218,
+        "avg_rating": 4.27
+      },
+      {
+        "title": "Cool Hand Luke (1967)",
+        "num_ratings": 57,
+        "avg_rating": 4.27
+      },
+      {
+        "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964)",
+        "num_ratings": 97,
+        "avg_rating": 4.27
+      },
+      {
+        "title": "Rear Window (1954)",
+        "num_ratings": 84,
+        "avg_rating": 4.26
+      },
+      {
+        "title": "Godfather: Part II, The (1974)",
+        "num_ratings": 129,
+        "avg_rating": 4.26
+      },
+      {
+        "title": "Departed, The (2006)",
+        "num_ratings": 107,
+        "avg_rating": 4.25
+      },
+      {
+        "title": "Goodfellas (1990)",
+        "num_ratings": 126,
+        "avg_rating": 4.25
+      },
+      {
+        "title": "Casablanca (1942)",
+        "num_ratings": 100,
+        "avg_rating": 4.24
+      }
+    ]
+  },
+  "genre_stats": {
+    "genre_distribution": [
+      {
+        "genres": "Drama",
+        "total_ratings": 41928,
+        "avg_rating": 3.66,
+        "num_movies": 4349
+      },
+      {
+        "genres": "Comedy",
+        "total_ratings": 39053,
+        "avg_rating": 3.38,
+        "num_movies": 3753
+      },
+      {
+        "genres": "Action",
+        "total_ratings": 30635,
+        "avg_rating": 3.45,
+        "num_movies": 1828
+      },
+      {
+        "genres": "Thriller",
+        "total_ratings": 26452,
+        "avg_rating": 3.49,
+        "num_movies": 1889
+      },
+      {
+        "genres": "Adventure",
+        "total_ratings": 24161,
+        "avg_rating": 3.51,
+        "num_movies": 1262
+      },
+      {
+        "genres": "Romance",
+        "total_ratings": 18124,
+        "avg_rating": 3.51,
+        "num_movies": 1591
+      },
+      {
+        "genres": "Sci-Fi",
+        "total_ratings": 17243,
+        "avg_rating": 3.46,
+        "num_movies": 980
+      },
+      {
+        "genres": "Crime",
+        "total_ratings": 16681,
+        "avg_rating": 3.66,
+        "num_movies": 1196
+      },
+      {
+        "genres": "Fantasy",
+        "total_ratings": 11834,
+        "avg_rating": 3.49,
+        "num_movies": 778
+      },
+      {
+        "genres": "Children",
+        "total_ratings": 9208,
+        "avg_rating": 3.41,
+        "num_movies": 664
+      },
+      {
+        "genres": "Mystery",
+        "total_ratings": 7674,
+        "avg_rating": 3.63,
+        "num_movies": 573
+      },
+      {
+        "genres": "Horror",
+        "total_ratings": 7291,
+        "avg_rating": 3.26,
+        "num_movies": 977
+      },
+      {
+        "genres": "Animation",
+        "total_ratings": 6988,
+        "avg_rating": 3.63,
+        "num_movies": 610
+      },
+      {
+        "genres": "War",
+        "total_ratings": 4859,
+        "avg_rating": 3.81,
+        "num_movies": 381
+      },
+      {
+        "genres": "IMAX",
+        "total_ratings": 4145,
+        "avg_rating": 3.62,
+        "num_movies": 158
+      },
+      {
+        "genres": "Musical",
+        "total_ratings": 4138,
+        "avg_rating": 3.56,
+        "num_movies": 333
+      },
+      {
+        "genres": "Western",
+        "total_ratings": 1930,
+        "avg_rating": 3.58,
+        "num_movies": 167
+      },
+      {
+        "genres": "Documentary",
+        "total_ratings": 1219,
+        "avg_rating": 3.8,
+        "num_movies": 438
+      },
+      {
+        "genres": "Film-Noir",
+        "total_ratings": 870,
+        "avg_rating": 3.92,
+        "num_movies": 85
+      }
+    ],
+    "most_popular_genres": [
+      {
+        "genres": "Drama",
+        "total_ratings": 41928,
+        "avg_rating": 3.66,
+        "num_movies": 4349
+      },
+      {
+        "genres": "Comedy",
+        "total_ratings": 39053,
+        "avg_rating": 3.38,
+        "num_movies": 3753
+      },
+      {
+        "genres": "Action",
+        "total_ratings": 30635,
+        "avg_rating": 3.45,
+        "num_movies": 1828
+      },
+      {
+        "genres": "Thriller",
+        "total_ratings": 26452,
+        "avg_rating": 3.49,
+        "num_movies": 1889
+      },
+      {
+        "genres": "Adventure",
+        "total_ratings": 24161,
+        "avg_rating": 3.51,
+        "num_movies": 1262
+      },
+      {
+        "genres": "Romance",
+        "total_ratings": 18124,
+        "avg_rating": 3.51,
+        "num_movies": 1591
+      },
+      {
+        "genres": "Sci-Fi",
+        "total_ratings": 17243,
+        "avg_rating": 3.46,
+        "num_movies": 980
+      },
+      {
+        "genres": "Crime",
+        "total_ratings": 16681,
+        "avg_rating": 3.66,
+        "num_movies": 1196
+      },
+      {
+        "genres": "Fantasy",
+        "total_ratings": 11834,
+        "avg_rating": 3.49,
+        "num_movies": 778
+      },
+      {
+        "genres": "Children",
+        "total_ratings": 9208,
+        "avg_rating": 3.41,
+        "num_movies": 664
+      }
+    ],
+    "total_genres": 19
+  },
+  "rating_distribution": {
+    "labels": [
+      "0.5",
+      "1.0",
+      "1.5",
+      "2.0",
+      "2.5",
+      "3.0",
+      "3.5",
+      "4.0",
+      "4.5",
+      "5.0"
+    ],
+    "values": [
+      1370,
+      2811,
+      1791,
+      7551,
+      5550,
+      20047,
+      13136,
+      26818,
+      8551,
+      13211
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "precision_at_k": 0.0395,
+  "recall_at_k": 0.0297,
+  "ndcg_at_k": 0.0476,
+  "k": 10,
+  "n_users_evaluated": 610
+}

@@ -1,0 +1,80 @@
+{
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "name": "Casual Viewers",
+      "size": 81,
+      "avg_rating": 3.86,
+      "avg_num_ratings": 101.4,
+      "top_genre": "Adventure",
+      "percentage": 13.3
+    },
+    {
+      "cluster_id": 1,
+      "name": "Sci-Fi Enthusiasts",
+      "size": 158,
+      "avg_rating": 3.44,
+      "avg_num_ratings": 415.9,
+      "top_genre": "Drama",
+      "percentage": 25.9
+    },
+    {
+      "cluster_id": 2,
+      "name": "Drama Lovers",
+      "size": 121,
+      "avg_rating": 3.57,
+      "avg_num_ratings": 92.9,
+      "top_genre": "Drama",
+      "percentage": 19.8
+    },
+    {
+      "cluster_id": 3,
+      "name": "Comedy Fans",
+      "size": 110,
+      "avg_rating": 3.78,
+      "avg_num_ratings": 51.8,
+      "top_genre": "Action",
+      "percentage": 18.0
+    },
+    {
+      "cluster_id": 4,
+      "name": "Action Buffs",
+      "size": 140,
+      "avg_rating": 3.76,
+      "avg_num_ratings": 71.2,
+      "top_genre": "Drama",
+      "percentage": 23.0
+    }
+  ],
+  "total_users": 610,
+  "cluster_distribution": {
+    "labels": [
+      "Casual Viewers",
+      "Sci-Fi Enthusiasts",
+      "Drama Lovers",
+      "Comedy Fans",
+      "Action Buffs"
+    ],
+    "values": [
+      81,
+      158,
+      121,
+      110,
+      140
+    ]
+  },
+  "activity_distribution": {
+    "labels": [
+      "Low",
+      "Medium",
+      "High",
+      "Very High"
+    ],
+    "values": [
+      156,
+      149,
+      154,
+      151
+    ]
+  }
+}

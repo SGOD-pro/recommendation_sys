@@ -1,0 +1,143 @@
+"""
+Module 5 - Collaborative Filtering
+Uses Surprise SVD (Singular Value Decomposition) for matrix factorization.
+Predicts user ratings for unseen movies.
+"""
+
+import pandas as pd
+import numpy as np
+import pickle
+import os
+from surprise import SVD, Dataset, Reader
+from surprise.model_selection import cross_validate
+
+MODELS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "models")
+
+
+class CollaborativeFilteringRecommender:
+    """SVD-based collaborative filtering using the Surprise library."""
+
+    def __init__(self, n_factors: int = 100, n_epochs: int = 20, lr_all: float = 0.005, reg_all: float = 0.02):
+        self.model = SVD(
+            n_factors=n_factors,
+            n_epochs=n_epochs,
+            lr_all=lr_all,
+            reg_all=reg_all,
+            random_state=42,
+        )
+        self.train_df = None
+        self.movie_info = None
+        self.is_fitted = False
+
+    def fit(self, train_df: pd.DataFrame) -> "CollaborativeFilteringRecommender":
+        """Train SVD model on the training data."""
+        self.train_df = train_df.copy()
+
+        # Store movie info for later lookups
+        self.movie_info = (
+            train_df.drop_duplicates("movieId")[["movieId", "title", "genres"]]
+            .set_index("movieId")
+        )
+
+        # Create Surprise dataset
+        reader = Reader(rating_scale=(0.5, 5.0))
+        data = Dataset.load_from_df(
+            train_df[["userId", "movieId", "rating"]], reader
+        )
+
+        # Build full trainset and fit
+        trainset = data.build_full_trainset()
+        self.model.fit(trainset)
+        self.is_fitted = True
+
+        print(f"[Collaborative] SVD model trained on {trainset.n_users} users, {trainset.n_items} items")
+        return self
+
+    def predict(self, user_id: int, movie_id: int) -> float:
+        """Predict rating for a user-movie pair."""
+        if not self.is_fitted:
+            raise ValueError("Model not fitted. Call fit() first.")
+        prediction = self.model.predict(user_id, movie_id)
+        return prediction.est
+
+    def recommend(self, user_id: int, n: int = 10, exclude_movie_ids: list = None) -> pd.DataFrame:
+        """Generate top-N recommendations for a user using collaborative filtering."""
+        if not self.is_fitted:
+            raise ValueError("Model not fitted. Call fit() first.")
+
+        # Get movies the user has already rated
+        user_rated = set(self.train_df[self.train_df["userId"] == user_id]["movieId"].values)
+
+        # Get all unique movie IDs
+        all_movies = self.train_df["movieId"].unique()
+
+        # Predict ratings for unseen movies
+        predictions = []
+        for movie_id in all_movies:
+            if movie_id in user_rated:
+                continue
+            if exclude_movie_ids and movie_id in exclude_movie_ids:
+                continue
+            pred_rating = self.predict(user_id, movie_id)
+            predictions.append({
+                "movieId": int(movie_id),
+                "predicted_rating": round(pred_rating, 3),
+            })
+
+        # Sort by predicted rating
+        pred_df = pd.DataFrame(predictions)
+        if pred_df.empty:
+            return pd.DataFrame(columns=["movieId", "title", "genres", "predicted_rating"])
+
+        pred_df = pred_df.sort_values("predicted_rating", ascending=False).head(n)
+
+        # Add movie info
+        result = pred_df.merge(
+            self.movie_info.reset_index(), on="movieId", how="left"
+        )
+
+        return result[["movieId", "title", "genres", "predicted_rating"]].reset_index(drop=True)
+
+    def get_all_predictions_for_user(self, user_id: int) -> dict:
+        """Get predicted ratings for all movies for a user. Returns {movieId: predicted_rating}."""
+        if not self.is_fitted:
+            return {}
+
+        user_rated = set(self.train_df[self.train_df["userId"] == user_id]["movieId"].values)
+        all_movies = self.train_df["movieId"].unique()
+
+        predictions = {}
+        for movie_id in all_movies:
+            if movie_id in user_rated:
+                continue
+            predictions[int(movie_id)] = self.predict(user_id, movie_id)
+
+        return predictions
+
+    def save_model(self, filepath: str = None):
+        """Save the trained model."""
+        if filepath is None:
+            os.makedirs(MODELS_DIR, exist_ok=True)
+            filepath = os.path.join(MODELS_DIR, "svd_model.pkl")
+        with open(filepath, "wb") as f:
+            pickle.dump(self.model, f)
+        print(f"[Collaborative] Model saved to {filepath}")
+
+    def load_model(self, filepath: str = None):
+        """Load a trained model."""
+        if filepath is None:
+            filepath = os.path.join(MODELS_DIR, "svd_model.pkl")
+        with open(filepath, "rb") as f:
+            self.model = pickle.load(f)
+        self.is_fitted = True
+        print(f"[Collaborative] Model loaded from {filepath}")
+
+
+if __name__ == "__main__":
+    from .splitter import get_train_test
+    train_df, _ = get_train_test()
+    cf = CollaborativeFilteringRecommender()
+    cf.fit(train_df)
+    cf.save_model()
+    print("\nRecommendations for User 1:")
+    print(cf.recommend(1, 10).to_string(index=False))
