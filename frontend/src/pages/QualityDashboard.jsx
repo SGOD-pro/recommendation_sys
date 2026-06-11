@@ -11,7 +11,7 @@ import {
 const TIP = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
-    <div className="glass rounded-xl px-3 py-2 text-xs border border-white/10">
+    <div className="glass-dark rounded-xl px-3 py-2 text-xs border border-white/10">
       <p className="text-slate-300 font-medium mb-1">{label}</p>
       {payload.map((p, i) => <p key={i} style={{ color: p.color }}>{p.name}: <b>{p.value}</b></p>)}
     </div>

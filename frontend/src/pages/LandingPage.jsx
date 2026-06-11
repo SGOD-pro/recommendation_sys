@@ -60,9 +60,9 @@ export default function LandingPage() {
         <p className="text-slate-500 text-sm mb-6">AI / ML Track</p>
 
         <div className="space-y-3 text-left">
-          <InfoRow icon={User}   label="Full Name"      value="Your Full Name" />
-          <InfoRow icon={Mail}   label="Email"          value="your@email.com" />
-          <InfoRow icon={Code2}  label="Project"        value="Hybrid AI Recommendation System" />
+          <InfoRow icon={User}   label="Full Name"      value="[Your Full Name]" />
+          <InfoRow icon={Mail}   label="Registered Email ID" value="[Your Registered Email ID]" />
+          <InfoRow icon={Code2}  label="Project Topic"  value="AI-Based Recommendation System" />
         </div>
       </section>
 

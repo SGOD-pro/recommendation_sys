@@ -12,7 +12,7 @@ const COLORS = ['#6366f1','#22d3ee','#10b981','#f59e0b','#f43f5e','#8b5cf6','#ec
 const TIP = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
-    <div className="glass rounded-xl px-3 py-2 text-xs border border-white/10">
+    <div className="glass-dark rounded-xl px-3 py-2 text-xs border border-white/10">
       <p className="text-slate-300 font-medium mb-1">{label}</p>
       {payload.map((p, i) => (
         <p key={i} style={{ color: p.color }}>{p.name}: <b>{typeof p.value === 'number' ? p.value.toLocaleString() : p.value}</b></p>

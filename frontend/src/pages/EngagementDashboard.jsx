@@ -14,7 +14,7 @@ const CLUSTER_ICONS = ['🎬','🚀','🎭','😄','💥']
 const TIP = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
-    <div className="glass rounded-xl px-3 py-2 text-xs border border-white/10">
+    <div className="glass-dark rounded-xl px-3 py-2 text-xs border border-white/10">
       <p className="text-slate-300 font-medium mb-1">{label}</p>
       {payload.map((p, i) => <p key={i} style={{ color: p.color }}>{p.name}: <b>{p.value?.toLocaleString?.() ?? p.value}</b></p>)}
     </div>
@@ -109,7 +109,7 @@ export default function EngagementDashboard() {
         <ChartCard title="Activity Level Distribution">
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={activityBar} margin={{ top: 4, right: 16, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.2)" />
               <XAxis dataKey="level" tick={{ fill: '#64748b', fontSize: 12 }} />
               <YAxis tick={{ fill: '#64748b', fontSize: 11 }} />
               <Tooltip content={<TIP />} />

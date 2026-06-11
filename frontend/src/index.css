@@ -26,6 +26,13 @@ body {
   backdrop-filter: blur(12px);
 }
 
+.glass-dark {
+  background: rgba(9, 9, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 .glass-hover {
   transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -127,4 +134,30 @@ body {
   background: linear-gradient(90deg, #1a1a3e 25%, #252550 50%, #1a1a3e 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+
+.recharts-text { fill:#8899b4 !important; }
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(20, 28, 46, 0.8) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--border-bright) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(20, 28, 46, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--border-bright) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-item,
+.recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-label {
+  color: #a11919 !important;
+  background: transparent !important;
 }

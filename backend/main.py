@@ -53,6 +53,7 @@ async def lifespan(app: FastAPI):
         weight_cf=0.4,
         weight_cb=0.1,
         weight_pop=0.5,
+        mmr_lambda=1.0,
         content_profile_strategy="weighted",
         popularity_method="bayesian",
     )
