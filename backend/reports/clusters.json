@@ -3,50 +3,50 @@
     {
       "cluster_id": 0,
       "name": "Casual Viewers",
-      "size": 81,
-      "avg_rating": 3.86,
-      "avg_num_ratings": 101.4,
-      "top_genre": "Adventure",
-      "percentage": 13.3
+      "size": 1571,
+      "avg_rating": 3.72,
+      "avg_num_ratings": 95.9,
+      "top_genre": "Action",
+      "percentage": 26.0
     },
     {
       "cluster_id": 1,
       "name": "Sci-Fi Enthusiasts",
-      "size": 158,
-      "avg_rating": 3.44,
-      "avg_num_ratings": 415.9,
-      "top_genre": "Drama",
-      "percentage": 25.9
+      "size": 1320,
+      "avg_rating": 3.5,
+      "avg_num_ratings": 438.9,
+      "top_genre": "Comedy",
+      "percentage": 21.9
     },
     {
       "cluster_id": 2,
       "name": "Drama Lovers",
-      "size": 121,
-      "avg_rating": 3.57,
-      "avg_num_ratings": 92.9,
+      "size": 1810,
+      "avg_rating": 3.87,
+      "avg_num_ratings": 81.2,
       "top_genre": "Drama",
-      "percentage": 19.8
+      "percentage": 30.0
     },
     {
       "cluster_id": 3,
       "name": "Comedy Fans",
-      "size": 110,
-      "avg_rating": 3.78,
-      "avg_num_ratings": 51.8,
-      "top_genre": "Action",
-      "percentage": 18.0
+      "size": 128,
+      "avg_rating": 3.46,
+      "avg_num_ratings": 114.7,
+      "top_genre": "Horror",
+      "percentage": 2.1
     },
     {
       "cluster_id": 4,
       "name": "Action Buffs",
-      "size": 140,
-      "avg_rating": 3.76,
-      "avg_num_ratings": 71.2,
-      "top_genre": "Drama",
-      "percentage": 23.0
+      "size": 1211,
+      "avg_rating": 3.69,
+      "avg_num_ratings": 89.6,
+      "top_genre": "Comedy",
+      "percentage": 20.0
     }
   ],
-  "total_users": 610,
+  "total_users": 6040,
   "cluster_distribution": {
     "labels": [
       "Casual Viewers",
@@ -56,11 +56,11 @@
       "Action Buffs"
     ],
     "values": [
-      81,
-      158,
-      121,
-      110,
-      140
+      1571,
+      1320,
+      1810,
+      128,
+      1211
     ]
   },
   "activity_distribution": {
@@ -71,10 +71,10 @@
       "Very High"
     ],
     "values": [
-      156,
-      149,
-      154,
-      151
+      1522,
+      1516,
+      1499,
+      1503
     ]
   }
 }

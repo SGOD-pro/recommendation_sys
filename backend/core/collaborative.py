@@ -10,14 +10,15 @@ import pickle
 import os
 from surprise import SVD, Dataset, Reader
 from surprise.model_selection import cross_validate
-
+from surprise.model_selection import GridSearchCV
 MODELS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "models")
 
 
 class CollaborativeFilteringRecommender:
     """SVD-based collaborative filtering using the Surprise library."""
 
-    def __init__(self, n_factors: int = 100, n_epochs: int = 20, lr_all: float = 0.005, reg_all: float = 0.02):
+    def __init__(self, n_factors: int = 150, n_epochs: int = 20, lr_all: float = 0.02, reg_all: float = 0.1):
+        
         self.model = SVD(
             n_factors=n_factors,
             n_epochs=n_epochs,
@@ -40,7 +41,7 @@ class CollaborativeFilteringRecommender:
         )
 
         # Create Surprise dataset
-        reader = Reader(rating_scale=(0.5, 5.0))
+        reader = Reader(rating_scale=(1.0, 5.0))
         data = Dataset.load_from_df(
             train_df[["userId", "movieId", "rating"]], reader
         )
@@ -104,15 +105,46 @@ class CollaborativeFilteringRecommender:
             return {}
 
         user_rated = set(self.train_df[self.train_df["userId"] == user_id]["movieId"].values)
-        all_movies = self.train_df["movieId"].unique()
+        all_movies = [int(m) for m in self.train_df["movieId"].unique()]
 
-        predictions = {}
-        for movie_id in all_movies:
-            if movie_id in user_rated:
-                continue
-            predictions[int(movie_id)] = self.predict(user_id, movie_id)
+        try:
+            trainset = self.model.trainset
+            inner_uid = trainset.to_inner_uid(user_id)
+            user_factor = self.model.pu[inner_uid]
+            base = trainset.global_mean + self.model.bu[inner_uid]
 
-        return predictions
+            candidate_ids = []
+            inner_iids = []
+            for movie_id in all_movies:
+                if movie_id in user_rated:
+                    continue
+                try:
+                    inner_iids.append(trainset.to_inner_iid(movie_id))
+                    candidate_ids.append(movie_id)
+                except ValueError:
+                    pass
+
+            if not candidate_ids:
+                return {}
+
+            inner_iids = np.array(inner_iids)
+            estimates = (
+                base
+                + self.model.bi[inner_iids]
+                + self.model.qi[inner_iids] @ user_factor
+            )
+            estimates = np.clip(estimates, 1.0, 5.0)
+            return {
+                int(movie_id): float(score)
+                for movie_id, score in zip(candidate_ids, estimates)
+            }
+        except ValueError:
+            predictions = {}
+            for movie_id in all_movies:
+                if movie_id in user_rated:
+                    continue
+                predictions[int(movie_id)] = self.predict(user_id, movie_id)
+            return predictions
 
     def save_model(self, filepath: str = None):
         """Save the trained model."""

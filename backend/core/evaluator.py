@@ -7,16 +7,40 @@ import numpy as np
 
 
 class RecommendationEvaluator:
-    def __init__(self, hybrid_recommender, train_df: pd.DataFrame, test_df: pd.DataFrame):
+    def __init__(
+        self,
+        hybrid_recommender,
+        train_df: pd.DataFrame,
+        test_df: pd.DataFrame,
+        relevance_threshold: float = 4.0,
+    ):
         self.recommender = hybrid_recommender
         self.train_df = train_df
         self.test_df = test_df
+        self.relevance_threshold = relevance_threshold
         self.metrics = {}
 
-    def _get_relevant_items(self, user_id: int, threshold: float = 3.5) -> set:
+    def _get_relevant_items(self, user_id: int, threshold: float | None = None) -> set:
         """Items in test set with rating >= threshold are considered relevant."""
+        if threshold is None:
+            threshold = self.relevance_threshold
         user_test = self.test_df[self.test_df["userId"] == user_id]
         return set(user_test[user_test["rating"] >= threshold]["movieId"].values)
+
+    def _score_recommendations(self, user_id: int, rec_ids: list[int], k: int) -> tuple[float, float, float]:
+        relevant = self._get_relevant_items(user_id)
+        if not relevant:
+            return 0.0, 0.0, 0.0
+        if not rec_ids:
+            return 0.0, 0.0, 0.0
+
+        rec_set = set(rec_ids)
+        precision = len(relevant & rec_set) / len(rec_ids)
+        recall = len(relevant & rec_set) / len(relevant)
+        dcg = sum(1.0 / np.log2(i + 2) for i, mid in enumerate(rec_ids[:k]) if mid in relevant)
+        idcg = sum(1.0 / np.log2(i + 2) for i in range(min(len(relevant), k)))
+        ndcg = dcg / idcg if idcg > 0 else 0.0
+        return precision, recall, ndcg
 
     def precision_at_k(self, user_id: int, k: int = 10) -> float:
         relevant = self._get_relevant_items(user_id)
@@ -61,9 +85,12 @@ class RecommendationEvaluator:
         for i, uid in enumerate(sample_users):
             if (i + 1) % 20 == 0:
                 print(f"  Progress: {i+1}/{len(sample_users)}")
-            precisions.append(self.precision_at_k(uid, k))
-            recalls.append(self.recall_at_k(uid, k))
-            ndcgs.append(self.ndcg_at_k(uid, k))
+            recs = self.recommender.recommend(uid, k)
+            rec_ids = [r["movieId"] for r in recs]
+            p, r, n = self._score_recommendations(uid, rec_ids, k)
+            precisions.append(p)
+            recalls.append(r)
+            ndcgs.append(n)
 
         self.metrics = {
             "precision_at_k": round(float(np.mean(precisions)), 4),

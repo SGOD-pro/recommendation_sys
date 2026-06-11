@@ -49,7 +49,13 @@ async def lifespan(app: FastAPI):
 
     # Modules 4-8: Train Hybrid Recommender (on train_df only)
     print("\n[4/6] Training recommendation models (on train split)...")
-    hybrid = HybridRecommender()
+    hybrid = HybridRecommender(
+        weight_cf=0.4,
+        weight_cb=0.1,
+        weight_pop=0.5,
+        content_profile_strategy="weighted",
+        popularity_method="bayesian",
+    )
     hybrid.fit(train_df)
 
     # Module 9: Evaluation (against holdout test split)
